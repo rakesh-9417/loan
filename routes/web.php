@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	if( Auth::check()){
+		return redirect('/home');
+	}else{
+		return view('welcome');
+	}
 });
 
 Route::get('/show','LoanController@ShowData');
@@ -25,5 +29,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', function () {
     //return view('welcome');
-    return view('dashboard');
+	return view('dashboard');
 });
+
+Route::get('/emp','EmployeesController@index');
+Route::get('/employees/getEmployees/','EmployeesController@getEmployees');
+
+
+Route::get('/pagination', 'PaginationController@index');
+
+Route::get('/pagination/fetch_data', 'PaginationController@fetch_data');
